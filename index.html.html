@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتبة المهارات الرقمية الشاملة | مدرسة إسكان الحسا الثانوية المختلطة</title>
+    <!-- تحميل خط تجوال العربي العصري -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <!-- تحميل مكتبة Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- تحميل مكتبة أيقونات Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- إعدادات Tailwind المخصصة -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 font-sans transition-colors duration-300 min-h-screen flex flex-col">
+
+    <!-- الشريط العلوي (Navbar) -->
+    <header class="sticky top-0 z-40 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+        <!-- شريط الهوية التعليمية الرسمي -->
+        <div class="bg-gradient-to-l from-slate-900 via-blue-950 to-slate-900 text-white py-1.5 px-4 text-xs border-b border-blue-800/40">
+            <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center gap-1 font-bold text-amber-300">
+                        <i data-lucide="school" class="w-3.5 h-3.5"></i>
+                        مدرسة إسكان الحسا الثانوية المختلطة
+                    </span>
+                    <span class="text-slate-400">|</span>
+                    <span class="text-blue-100 font-medium">مديرية التربية والتعليم لمنطقة الطفيلة</span>
+                </div>
+                <div class="flex items-center gap-1.5 bg-white/10 px-2.5 py-0.5 rounded-full border border-white/15">
+                    <i data-lucide="award" class="w-3.5 h-3.5 text-emerald-300"></i>
+                    <span class="text-slate-100 font-bold">إعداد المعلمة: أنعام الهدايات</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- الشعار -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
+                    <i data-lucide="cpu" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-extrabold bg-gradient-to-l from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                        مكتبة المهارات الرقمية
+                    </h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">حقيبة الطالب الذكية للتطبيقات والمصادر التقنية</p>
+                </div>
+            </div>
+
+            <!-- أزرار التحكم العلوية -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- زر المفضلة -->
+                <button id="favoritesToggleBtn" onclick="toggleFavoritesFilter()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-rose-950/50 dark:hover:text-rose-400 transition-all border border-transparent hover:border-rose-200 dark:hover:border-rose-800">
+                    <i data-lucide="heart" class="w-4 h-4"></i>
+                    <span class="hidden md:inline">المفضلة</span>
+                    <span id="favCountBadge" class="bg-rose-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">0</span>
+                </button>
+
+                <!-- أزرار التنقل السريع للأقسام -->
+                <nav class="hidden lg:flex items-center gap-1 text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+                    <a href="#toolsSection" class="px-2.5 py-1.5 rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-colors">المكتبة</a>
+                    <a href="#codingHubSection" class="px-2.5 py-1.5 rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-colors text-emerald-600 dark:text-emerald-400">بايثون وسكراتش</a>
+                    <a href="#aiHubSection" class="px-2.5 py-1.5 rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-colors text-indigo-600 dark:text-indigo-400">الذكاء الاصطناعي</a>
+                    <a href="#networksSection" class="px-2.5 py-1.5 rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-colors text-purple-600 dark:text-purple-400">باكت تريسر</a>
+                </nav>
+
+                <!-- زر مختبر الكود السريع -->
+                <button onclick="openPlaygroundModal()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium bg-indigo-50 hover:bg-indigo-100 text-indigo-700 dark:bg-indigo-950/60 dark:hover:bg-indigo-900/60 dark:text-indigo-300 transition-all border border-indigo-200 dark:border-indigo-800">
+                    <i data-lucide="terminal" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">مختبر HTML السريع</span>
+                </button>
+
+                <!-- زر تبديل الوضع الليلي/النهاري -->
+                <button id="themeToggle" onclick="toggleDarkMode()" aria-label="تبديل المظهر" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors">
+                    <i data-lucide="moon" id="moonIcon" class="w-5 h-5 block dark:hidden"></i>
+                    <i data-lucide="sun" id="sunIcon" class="w-5 h-5 hidden dark:block text-amber-400"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- القسم الترحيبي والبحث (Hero & Search Section) -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-blue-50/80 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 pt-8 pb-10 border-b border-slate-200/60 dark:border-slate-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- بطاقة التوثيق الرسمي في أعلى الواجهة -->
+            <div class="max-w-3xl mx-auto mb-6">
+                <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-blue-200/80 dark:border-blue-800/60 rounded-2xl p-3.5 sm:px-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-right">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-800">
+                            <i data-lucide="landmark" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">مدرسة إسكان الحسا الثانوية المختلطة — مديرية التربية والتعليم لمنطقة الطفيلة</p>
+                            <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">مبادرة رقمية لدعم تعلم الطلبة وتطوير مهاراتهم التقنية</p>
+                        </div>
+                    </div>
+                    <div class="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-l from-blue-600 to-indigo-600 text-white text-xs font-bold shadow-sm">
+                        <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
+                        <span>إعداد المعلمة: أنعام الهدايات</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 mb-3">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    كل ما تحتاجه الطالبة في مكان واحد
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mb-3 leading-tight">
+                    استكشف أدوات وتطبيقات <span class="text-blue-600 dark:text-blue-400">المهارات الرقمية</span>
+                </h2>
+                <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+                    منصات برمجة تفاعلية، محاكاة الشبكات (Packet Tracer)، أدوات الذكاء الاصطناعي، ومصادر السلامة الرقمية مصنفة حسب مرحلتك الدراسية.
+                </p>
+            </div>
+
+            <!-- شريط البحث الفوري -->
+            <div class="max-w-2xl mx-auto mb-6">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-600 transition-colors">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                    </div>
+                    <input type="text" id="searchInput" oninput="filterTools()"
+                        placeholder="ابحث عن أداة، برنامج، أو مهارة (مثال: سكراتش، بايثون، HTML، كانفا، أمان...)"
+                        class="w-full pr-12 pl-12 py-4 rounded-2xl bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none shadow-lg shadow-slate-200/40 dark:shadow-none text-slate-800 dark:text-white placeholder-slate-400 text-sm sm:text-base transition-all">
+                    <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                        <i data-lucide="x-circle" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- شريط تصفية الصفوف الدراسية -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-4">
+                <span class="text-xs font-bold text-slate-500 dark:text-slate-400 ml-1 flex items-center gap-1">
+                    <i data-lucide="graduation-cap" class="w-4 h-4"></i> المرحلة:
+                </span>
+                <button onclick="setGradeFilter('all')" data-grade="all" class="grade-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-blue-600 text-white shadow-md shadow-blue-500/25">
+                    جميع المراحل
+                </button>
+                <button onclick="setGradeFilter('elementary')" data-grade="elementary" class="grade-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-blue-400">
+                    المرحلة الأساسية
+                </button>
+                <button onclick="setGradeFilter('middle')" data-grade="middle" class="grade-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-blue-400">
+                    المرحلة المتوسطة
+                </button>
+                <button onclick="setGradeFilter('high')" data-grade="high" class="grade-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-blue-400">
+                    المرحلة الثانوية
+                </button>
+            </div>
+
+            <!-- روابط اختصار سريعة للأقسام التفاعلية -->
+            <div class="flex flex-wrap items-center justify-center gap-2.5 pt-2">
+                <a href="#codingHubSection" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl text-xs font-bold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/70 transition-all">
+                    <i data-lucide="code-2" class="w-4 h-4"></i>
+                    ركن بايثون وسكراتش التفاعلي
+                </a>
+                <a href="#aiHubSection" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl text-xs font-bold bg-indigo-50 hover:bg-indigo-100 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/70 transition-all">
+                    <i data-lucide="bot" class="w-4 h-4"></i>
+                    مركز الذكاء الاصطناعي والأوامر
+                </a>
+                <a href="#networksSection" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl text-xs font-bold bg-purple-50 hover:bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 border border-purple-200 dark:border-purple-800/70 transition-all">
+                    <i data-lucide="network" class="w-4 h-4"></i>
+                    مختبر الشبكات وباكت تريسر
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي -->
+    <main id="toolsSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+        <!-- أزرار تصفية المواضيع والمجالات -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                    <i data-lucide="layers" class="w-4 h-4 text-blue-600"></i>
+                    تصفية حسب المجال التقني:
+                </h3>
+                <span id="resultsCounter" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-200/70 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                    عرض 18 أداة
+                </span>
+            </div>
+            
+            <div id="categoryFilters" class="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
+                <button onclick="setCategoryFilter('all')" data-cat="all" class="cat-btn active shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm transition-all">
+                    <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                    الكل
+                </button>
+                <button onclick="setCategoryFilter('programming')" data-cat="programming" class="cat-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">
+                    <i data-lucide="code-2" class="w-4 h-4 text-emerald-500"></i>
+                    البرمجة (سكراتش وبايثون)
+                </button>
+                <button onclick="setCategoryFilter('web')" data-cat="web" class="cat-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">
+                    <i data-lucide="globe" class="w-4 h-4 text-blue-500"></i>
+                    تصميم المواقع HTML/CSS
+                </button>
+                <button onclick="setCategoryFilter('basics')" data-cat="basics" class="cat-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">
+                    <i data-lucide="file-spreadsheet" class="w-4 h-4 text-amber-500"></i>
+                    المهارات الرقمية الأساسية
+                </button>
+                <button onclick="setCategoryFilter('networks')" data-cat="networks" class="cat-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">
+                    <i data-lucide="network" class="w-4 h-4 text-purple-500"></i>
+                    الشبكات وباكت تريسر
+                </button>
+                <button onclick="setCategoryFilter('safety')" data-cat="safety" class="cat-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-rose-500"></i>
+                    السلامة الرقمية
+                </button>
+                <button onclick="setCategoryFilter('projects')" data-cat="projects" class="cat-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">
+                    <i data-lucide="brain-circuit" class="w-4 h-4 text-indigo-500"></i>
+                    الذكاء الاصطناعي والمشاريع
+                </button>
+            </div>
+        </div>
+
+        <!-- شبكة عرض البطاقات التفاعلية -->
+        <div id="toolsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+            <!-- يتم توليد البطاقات ديناميكياً بواسطة JavaScript -->
+        </div>
+
+        <!-- رسالة في حال عدم وجود نتائج -->
+        <div id="emptyState" class="hidden text-center py-16 px-4 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 mb-14">
+            <div class="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="search-x" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-2">لم نجد أدوات تطابق بحثك!</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-5">
+                جرب البحث بكلمات أبسط أو قم بإعادة ضبط فلاتر المرحلة الدراسية والمجال التقني.
+            </p>
+            <button onclick="resetAllFilters()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold transition-colors">
+                عرض جميع الأدوات
+            </button>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- قسم ركن البرمجة التفاعلي: بايثون وسكراتش (Python & Scratch Hub) -->
+        <!-- ========================================================= -->
+        <section id="codingHubSection" class="mb-14 scroll-mt-24">
+            <div class="bg-white dark:bg-slate-900 rounded-3xl border border-emerald-200/80 dark:border-emerald-900/60 shadow-sm overflow-hidden">
+                <!-- رأس القسم مع التبويبات -->
+                <div class="p-6 sm:p-8 bg-gradient-to-l from-emerald-600 via-teal-600 to-cyan-700 text-white flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/15 backdrop-blur-sm mb-2">
+                            <i data-lucide="code-2" class="w-3.5 h-3.5"></i>
+                            البرمجة والتفكير الخوارزمي
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl font-black">ركن البرمجة التفاعلي: بايثون (Python) وسكراتش (Scratch)</h2>
+                        <p class="text-xs sm:text-sm text-emerald-50 mt-1">تعلّم أساسيات البرمجة باللبنات الرسومية أو الأكواد النصية وجرّب تشغيل كود بايثون مباشرة هنا!</p>
+                    </div>
+
+                    <!-- أزرار التبديل بين بايثون وسكراتش -->
+                    <div class="flex items-center gap-2 bg-slate-950/30 p-1.5 rounded-2xl self-start lg:self-auto backdrop-blur-sm">
+                        <button id="tabPythonBtn" onclick="switchCodingTab('python')" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-white text-emerald-800 shadow-md transition-all">
+                            <i data-lucide="terminal-square" class="w-4 h-4"></i>
+                            لغة بايثون (Python)
+                        </button>
+                        <button id="tabScratchBtn" onclick="switchCodingTab('scratch')" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white hover:bg-white/15 transition-all">
+                            <i data-lucide="puzzle" class="w-4 h-4"></i>
+                            برمجة سكراتش (Scratch)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- محتوى تبويب بايثون (Python Content) -->
+                <div id="pythonTabContent" class="p-6 sm:p-8 space-y-8">
+                    <!-- بطاقات المفاهيم الأساسية في بايثون -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200/70 dark:border-slate-700">
+                            <div class="w-9 h-9 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-3 font-mono font-bold text-sm">x=5</div>
+                            <h4 class="font-extrabold text-sm text-slate-900 dark:text-white mb-1">المتغيرات وأنواع البيانات</h4>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">تخزين الأرقام الصحيحة (int)، العشرية (float)، والنصوص (str) بدون الحاجة لتحديد النوع مسبقاً.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200/70 dark:border-slate-700">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-3 font-mono font-bold text-sm">if:</div>
+                            <h4 class="font-extrabold text-sm text-slate-900 dark:text-white mb-1">الجمل الشرطية (if / elif / else)</h4>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">اتخاذ القرارات البرمجية بناءً على تحقق الشروط المنطقية مع الانتباه للمسافة البادئة (Indentation).</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200/70 dark:border-slate-700">
+                            <div class="w-9 h-9 rounded-xl bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-3 font-mono font-bold text-sm">for</div>
+                            <h4 class="font-extrabold text-sm text-slate-900 dark:text-white mb-1">الحلقات التكرارية (for / while)</h4>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">تكرار تنفيذ الأوامر البرمجية لعدد محدد من المرات أو طالما بقي الشرط صحيحاً.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200/70 dark:border-slate-700">
+                            <div class="w-9 h-9 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-3 font-mono font-bold text-sm">def</div>
+                            <h4 class="font-extrabold text-sm text-slate-900 dark:text-white mb-1">الإدخال والإخراج والدوال</h4>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">استقبال البيانات عبر <code class="text-purple-600 dark:text-purple-400">input()</code> وطباعة النتائج عبر <code class="text-purple-600 dark:text-purple-400">print()</code> وتنظيم الكود بالدوال.</p>
+                        </div>
+                    </div>
+
+                    <!-- محاكي بايثون التفاعلي + أمثلة أكواد جاهزة -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                        <!-- قائمة أمثلة أكواد بايثون الجاهزة -->
+                        <div class="lg:col-span-5 flex flex-col justify-between bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800">
+                            <div>
+                                <h4 class="text-sm font-extrabold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                                    <i data-lucide="file-code-2" class="w-4 h-4 text-emerald-600"></i>
+                                    أمثلة تطبيقية جاهزة للتجربة:
+                                </h4>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">اختر مثالاً لتحميله في المحاكي وتشغيله فوراً:</p>
+                                <div class="space-y-2.5">
+                                    <button onclick="loadPythonExample('grade')" class="w-full text-right p-3 rounded-xl bg-white dark:bg-slate-900 hover:border-emerald-500 border border-slate-200 dark:border-slate-700 transition-all group">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-white group-hover:text-emerald-600">1. برنامج حساب التقدير الدراسي (if/else)</span>
+                                            <i data-lucide="play-circle" class="w-4 h-4 text-emerald-500"></i>
+                                        </div>
+                                        <p class="text-[11px] text-slate-500 mt-0.5">يحدد تقدير الطالب (ممتاز، جيد جداً...) بناءً على العلامة.</p>
+                                    </button>
+                                    <button onclick="loadPythonExample('loop')" class="w-full text-right p-3 rounded-xl bg-white dark:bg-slate-900 hover:border-emerald-500 border border-slate-200 dark:border-slate-700 transition-all group">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-white group-hover:text-emerald-600">2. جدول الضرب التفاعلي (حلقة for)</span>
+                                            <i data-lucide="play-circle" class="w-4 h-4 text-emerald-500"></i>
+                                        </div>
+                                        <p class="text-[11px] text-slate-500 mt-0.5">يستخدم التكرار لطباعة جدول ضرب أي رقم من 1 إلى 10.</p>
+                                    </button>
+                                    <button onclick="loadPythonExample('calc')" class="w-full text-right p-3 rounded-xl bg-white dark:bg-slate-900 hover:border-emerald-500 border border-slate-200 dark:border-slate-700 transition-all group">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-white group-hover:text-emerald-600">3. حاسبة مساحة المستطيل والمحيط</span>
+                                            <i data-lucide="play-circle" class="w-4 h-4 text-emerald-500"></i>
+                                        </div>
+                                        <p class="text-[11px] text-slate-500 mt-0.5">تطبيق عملي على المتغيرات والعمليات الحسابية والطباعة المنسقة.</p>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-700 flex flex-wrap gap-2">
+                                <a href="https://www.programiz.com/python-programming/online-compiler/" target="_blank" rel="noopener noreferrer"
+                                    class="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors">
+                                    <span>محرر بايثون سحابي متكامل</span>
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- محاكي بايثون الفوري داخل الصفحة -->
+                        <div class="lg:col-span-7 bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden flex flex-col">
+                            <div class="px-4 py-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                                    <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                                    <span class="text-xs font-mono text-slate-300 mr-2">main.py — مختبر بايثون التفاعلي</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="copyPythonCode()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition-colors">
+                                        نسخ الكود
+                                    </button>
+                                    <button onclick="runPythonSimulator()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold shadow-sm transition-colors">
+                                        <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                                        تشغيل الكود (Run)
+                                    </button>
+                                </div>
+                            </div>
+                            <textarea id="pythonCodeArea" dir="ltr" rows="9" spellcheck="false"
+                                class="w-full p-4 bg-slate-950 text-emerald-300 font-mono text-xs sm:text-sm focus:outline-none resize-none leading-relaxed"></textarea>
+                            <div class="bg-slate-900/90 border-t border-slate-800 p-4">
+                                <div class="text-[11px] font-bold text-slate-400 mb-1.5 flex items-center justify-between">
+                                    <span>شاشة المخرجات (Console Output):</span>
+                                    <span class="text-emerald-400">جاهز للتنفيذ</span>
+                                </div>
+                                <pre id="pythonConsoleOutput" dir="ltr" class="font-mono text-xs sm:text-sm text-amber-300 whitespace-pre-wrap min-h-[76px] leading-relaxed">اضغط على زر "تشغيل الكود (Run)" لمشاهدة النتيجة...</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- محتوى تبويب سكراتش (Scratch Content) -->
+                <div id="scratchTabContent" class="hidden p-6 sm:p-8 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <!-- فئات اللبنات البرمجية -->
+                        <div class="p-5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/50">
+                            <h4 class="font-extrabold text-base text-amber-800 dark:text-amber-300 mb-3 flex items-center gap-2">
+                                <i data-lucide="blocks" class="w-5 h-5"></i>
+                                أهم مجموعات اللبنات في سكراتش:
+                            </h4>
+                            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                                <li class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-500 shrink-0"></span> <strong>الحركة (Motion):</strong> تحريك الكائن وتدويره وتحديد إحداثياته (X, Y).</li>
+                                <li class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-yellow-500 shrink-0"></span> <strong>الأحداث (Events):</strong> بدء البرنامج عند النقر على العلم الأخضر أو الضغط على مفتاح.</li>
+                                <li class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-orange-500 shrink-0"></span> <strong>التحكم (Control):</strong> التكرار (كرر باستمرار) والجمل الشرطية (إذا... وإلا).</li>
+                                <li class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-500 shrink-0"></span> <strong>العمليات (Operators):</strong> المقارنات الرياضية والمنطقية (و، أو، ليس).</li>
+                                <li class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-rose-500 shrink-0"></span> <strong>المتغيرات (Variables):</strong> حفظ النقاط (Score) والمؤقت الزمني في الألعاب.</li>
+                            </ul>
+                        </div>
+
+                        <!-- أفكار مشاريع تطبيقية للطلبة -->
+                        <div class="p-5 rounded-2xl bg-sky-50/70 dark:bg-sky-950/20 border border-sky-200/80 dark:border-sky-900/50">
+                            <h4 class="font-extrabold text-base text-sky-800 dark:text-sky-300 mb-3 flex items-center gap-2">
+                                <i data-lucide="gamepad-2" class="w-5 h-5"></i>
+                                مشاريع مقترحة للتطبيق العملي:
+                            </h4>
+                            <div class="space-y-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                                <div class="p-3 rounded-xl bg-white dark:bg-slate-900 border border-sky-100 dark:border-slate-800">
+                                    <p class="font-bold text-slate-900 dark:text-white">1. لعبة صائد التفاح (المتغيرات والشرط)</p>
+                                    <p class="text-xs text-slate-500 mt-1">تحريك السلة يميناً ويساراً لالتقاط التفاح وزيادة متغير النقاط بمقدار 1 عند الملامسة.</p>
+                                </div>
+                                <div class="p-3 rounded-xl bg-white dark:bg-slate-900 border border-sky-100 dark:border-slate-800">
+                                    <p class="font-bold text-slate-900 dark:text-white">2. قصة تفاعلية عن السلامة الرقمية</p>
+                                    <p class="text-xs text-slate-500 mt-1">تبديل الخلفيات والمظاهر وبث الرسائل (Broadcast) بين الشخصيات.</p>
+                                </div>
+                                <div class="p-3 rounded-xl bg-white dark:bg-slate-900 border border-sky-100 dark:border-slate-800">
+                                    <p class="font-bold text-slate-900 dark:text-white">3. مسابقة الأسئلة الذكية</p>
+                                    <p class="text-xs text-slate-500 mt-1">استخدام لبنة (اسأل وانتظر) للتحقق من إجابة المستخدم وإعطائه تغذية راجعة فورية.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- بطاقة البدء السريع في سكراتش -->
+                        <div class="p-5 rounded-2xl bg-gradient-to-b from-amber-500 to-orange-600 text-white flex flex-col justify-between">
+                            <div>
+                                <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center mb-4">
+                                    <i data-lucide="rocket" class="w-6 h-6"></i>
+                                </div>
+                                <h4 class="text-lg font-black mb-2">ابدأ مشروعك في Scratch الآن!</h4>
+                                <p class="text-xs sm:text-sm text-amber-50 leading-relaxed mb-4">
+                                    منصة سكراتش تعمل مباشرة من المتصفح وتدعم اللغة العربية بالكامل. يمكنك إنشاء حساب مجاني لحفظ مشاريعك ومشاركتها مع معلمتك.
+                                </p>
+                            </div>
+                            <a href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener noreferrer"
+                                class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white text-orange-700 hover:bg-amber-50 font-extrabold text-sm shadow-lg transition-all">
+                                <span>فتح محرر سكراتش المباشر</span>
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- قسم مركز تطبيقات وأوامر الذكاء الاصطناعي (AI Hub) -->
+        <!-- ========================================================= -->
+        <section id="aiHubSection" class="mb-14 scroll-mt-24">
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-indigo-200/80 dark:border-indigo-900/60 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-100 dark:border-slate-800">
+                    <div>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-950/80 dark:text-indigo-300 mb-2">
+                            <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+                            مستقبل التقنية والتعلم الذكي
+                        </span>
+                        <h2 class="text-2xl font-black text-slate-900 dark:text-white">
+                            مركز تطبيقات <span class="text-indigo-600 dark:text-indigo-400">الذكاء الاصطناعي (AI)</span> للطلبة
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                            تعرّف على أبرز أدوات الذكاء الاصطناعي وكيفية كتابة أوامر ذكية (Prompts) تساعدك في الفهم والبرمجة والتصميم.
+                        </p>
+                    </div>
+                    <button onclick="setCategoryFilter('projects'); document.getElementById('toolsGrid').scrollIntoView({behavior: 'smooth'});"
+                        class="shrink-0 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold shadow-sm transition-all">
+                        <span>عرض كل أدوات الذكاء الاصطناعي في المكتبة</span>
+                        <i data-lucide="arrow-up-left" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- مكتبة الأوامر الذكية الجاهزة للنسخ (Prompts) -->
+                    <div class="lg:col-span-7 space-y-3">
+                        <h3 class="text-sm font-extrabold text-slate-800 dark:text-white flex items-center gap-2 mb-2">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-indigo-500"></i>
+                            أوامر ذكية (Prompts) جاهزة للنسخ والاستخدام في Gemini أو ChatGPT:
+                        </h3>
+
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700 flex items-start justify-between gap-3">
+                            <div>
+                                <span class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400">للفهم والتبسيط:</span>
+                                <p id="prompt1" class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 mt-1 font-medium">
+                                    "اشرح لي مفهوم [الحلقات التكرارية في بايثون] بأسلوب مبسط جداً مع مثال من حياتنا اليومية، ثم اطرح عليّ 3 أسئلة قصيرة لأختبر فهمي."
+                                </p>
+                            </div>
+                            <button onclick="copyPromptText('prompt1')" class="shrink-0 p-2 rounded-xl bg-white dark:bg-slate-900 hover:bg-indigo-50 text-indigo-600 border border-slate-200 dark:border-slate-700 transition-colors" title="نسخ الأمر">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700 flex items-start justify-between gap-3">
+                            <div>
+                                <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">لاكتشاف أخطاء البرمجة:</span>
+                                <p id="prompt2" class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 mt-1 font-medium">
+                                    "لدي هذا الكود البرمجي ولا يعمل كما هو متوقع. لا تعطني الحل مباشرة، بل أرشدني خطوة بخطوة لاكتشاف مكان الخطأ وفهم سببه: [الصق الكود هنا]"
+                                </p>
+                            </div>
+                            <button onclick="copyPromptText('prompt2')" class="shrink-0 p-2 rounded-xl bg-white dark:bg-slate-900 hover:bg-indigo-50 text-indigo-600 border border-slate-200 dark:border-slate-700 transition-colors" title="نسخ الأمر">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700 flex items-start justify-between gap-3">
+                            <div>
+                                <span class="text-[11px] font-bold text-purple-600 dark:text-purple-400">لتخطيط المشاريع والعروض:</span>
+                                <p id="prompt3" class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 mt-1 font-medium">
+                                    "ساعدني في تنظيم هيكل عرض تقديمي من 6 شرائح حول [أهمية الأمن السيبراني] لطلبة المرحلة الثانوية مع اقتراح أفكار لرسوم توضيحية لكل شريحة."
+                                </p>
+                            </div>
+                            <button onclick="copyPromptText('prompt3')" class="shrink-0 p-2 rounded-xl bg-white dark:bg-slate-900 hover:bg-indigo-50 text-indigo-600 border border-slate-200 dark:border-slate-700 transition-colors" title="نسخ الأمر">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ميثاق الاستخدام الأخلاقي والآمن للذكاء الاصطناعي -->
+                    <div class="lg:col-span-5 bg-indigo-50/70 dark:bg-indigo-950/30 rounded-2xl p-5 border border-indigo-100 dark:border-indigo-900/50 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-sm font-extrabold text-indigo-900 dark:text-indigo-300 mb-3 flex items-center gap-2">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-indigo-600 dark:text-indigo-400"></i>
+                                ميثاق الاستخدام الذكي والأخلاقي للذكاء الاصطناعي:
+                            </h4>
+                            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+                                    <span><strong>مساعد للتعلم لا بديل للعقل:</strong> استخدم الذكاء الاصطناعي للفهم وتوليد الأفكار، لا لنسخ الواجبات دون قراءة.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+                                    <span><strong>التحقق من المعلومات:</strong> قد يخطئ الذكاء الاصطناعي أحياناً؛ قارن دائماً إجاباته بالكتاب المدرسي.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+                                    <span><strong>حماية الخصوصية:</strong> لا تكتب اسمك الكامل، رقم هاتفك، أو كلمات مرورك في أي محادثة ذكاء اصطناعي.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+                                    <span><strong>الأمانة العلمية:</strong> أضف لمستك الإبداعية الخاصة على أي مشروع أو بحث.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-5 pt-3 border-t border-indigo-200/60 dark:border-indigo-800/50 flex items-center justify-between text-xs">
+                            <span class="font-bold text-indigo-700 dark:text-indigo-300">جرّب تدريب نموذجك الخاص:</span>
+                            <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener noreferrer" class="font-extrabold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">
+                                Teachable Machine <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- قسم محاكاة الشبكات (Cisco Packet Tracer) -->
+        <!-- ========================================================= -->
+        <section id="networksSection" class="mb-14 scroll-mt-24">
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-purple-200/80 dark:border-purple-900/60 shadow-sm relative overflow-hidden">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-100 dark:border-slate-800">
+                    <div>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-950/80 dark:text-purple-300 mb-2">
+                            <i data-lucide="network" class="w-3.5 h-3.5"></i>
+                            محاكاة الشبكات العملية — Cisco Networking Academy
+                        </span>
+                        <h2 class="text-2xl font-black text-slate-900 dark:text-white">
+                            برنامج محاكاة الشبكات <span class="text-purple-600 dark:text-purple-400">Cisco Packet Tracer</span>
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 max-w-3xl">
+                            بيئة مختبر افتراضي متكاملة تتيح للطلبة بناء الشبكات الحاسوبية، ربط الأجهزة والموجهات، وضبط عناوين IP وتتبع حركة حزم البيانات عملياً دون تكلفة.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+                        <a href="https://www.netacad.com/cisco-packet-tracer" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-bold shadow-sm transition-all">
+                            <span>الموقع الرسمي والتحميل</span>
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                        <button onclick="openToolDetails('cisco-packet-tracer')"
+                            class="py-2.5 px-4 rounded-xl bg-purple-50 hover:bg-purple-100 dark:bg-purple-950/60 dark:hover:bg-purple-900/60 text-purple-700 dark:text-purple-300 text-xs sm:text-sm font-bold transition-colors">
+                            بطاقة التفاصيل
+                        </button>
+                    </div>
+                </div>
+
+                <!-- مكونات الشبكة وخطوات العمل -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="p-4 rounded-2xl bg-purple-50/60 dark:bg-purple-950/20 border border-purple-100 dark:border-purple-900/40">
+                        <span class="inline-block px-2 py-0.5 rounded-md bg-purple-600 text-white text-[11px] font-bold mb-2">الخطوة 1</span>
+                        <h4 class="font-extrabold text-sm text-slate-900 dark:text-white mb-1">اختيار الأجهزة الطرفية</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">إضافة أجهزة الحاسوب (PC)، الخوادم (Server)، والمبدلات (Switch) والموجهات (Router) إلى مساحة العمل.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-purple-50/60 dark:bg-purple-950/20 border border-purple-100 dark:border-purple-900/40">
+                        <span class="inline-block px-2 py-0.5 rounded-md bg-purple-600 text-white text-[11px] font-bold mb-2">الخطوة 2</span>
+                        <h4 class="font-extrabold text-sm text-slate-900 dark:text-white mb-1">توصيل الكابلات المناسبة</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">استخدام كابل مستقيم (Straight-Through) لربط الأجهزة المختلفة، أو كابل متقاطع (Cross-Over) للأجهزة المتشابهة.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-purple-50/60 dark:bg-purple-950/20 border border-purple-100 dark:border-purple-900/40">
+                        <span class="inline-block px-2 py-0.5 rounded-md bg-purple-600 text-white text-[11px] font-bold mb-2">الخطوة 3</span>
+                        <h4 class="font-extrabold text-sm text-slate-900 dark:text-white mb-1">ضبط عناوين IP</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">إعطاء كل جهاز عنوان IP فريد ضمن نفس الشبكة (مثل 192.168.1.10) وقناع الشبكة (255.255.255.0).</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-purple-50/60 dark:bg-purple-950/20 border border-purple-100 dark:border-purple-900/40">
+                        <span class="inline-block px-2 py-0.5 rounded-md bg-purple-600 text-white text-[11px] font-bold mb-2">الخطوة 4</span>
+                        <h4 class="font-extrabold text-sm text-slate-900 dark:text-white mb-1">اختبار الاتصال والمحاكاة</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">تنفيذ أمر <code class="text-purple-600 font-bold">ping</code> أو استخدام وضع (Simulation) لمشاهدة حركة حزم البيانات خطوة بخطوة.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ركن النصائح السريعة والاختصارات للطالب -->
+        <section class="bg-gradient-to-l from-indigo-600 via-blue-600 to-blue-700 rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-blue-900/15 relative overflow-hidden">
+            <div class="relative z-10">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center">
+                            <i data-lucide="lightbulb" class="w-6 h-6 text-amber-300"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-extrabold">ركن النصائح السريعة للطالب الذكي</h3>
+                            <p class="text-xs sm:text-sm text-blue-100">إرشادات واختصارات ترفع كفاءتك في مادة المهارات الرقمية</p>
+                        </div>
+                    </div>
+                    <button onclick="nextTip()" class="self-start sm:self-auto flex items-center gap-2 px-4 py-2 rounded-xl bg-white/15 hover:bg-white/25 backdrop-blur-sm text-sm font-bold transition-all">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                        نصيحة جديدة
+                    </button>
+                </div>
+
+                <!-- بطاقة النصيحة المتغيرة + اختصارات لوحة المفاتيح -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- النصيحة التفاعلية -->
+                    <div class="lg:col-span-2 bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/15 flex flex-col justify-between">
+                        <div>
+                            <span id="tipBadge" class="inline-block px-2.5 py-1 rounded-lg bg-amber-400/20 text-amber-200 text-xs font-bold mb-3">
+                                نصيحة برمجية
+                            </span>
+                            <h4 id="tipTitle" class="text-lg font-bold mb-2">قسّم المشكلة الكبيرة إلى خطوات صغيرة (الخوارزمية)</h4>
+                            <p id="tipDescription" class="text-sm text-blue-50 leading-relaxed">
+                                قبل أن تبدأ بكتابة الكود في بايثون أو سحب اللبنات في سكراتش، اكتب خطوات الحل على ورقة بالترتيب. التفكير الخوارزمي يوفر 70% من وقت تصحيح الأخطاء!
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-blue-200">
+                            <span id="tipCounter">نصيحة 1 من 5</span>
+                            <span>سلسلة إتقان المهارات الرقمية</span>
+                        </div>
+                    </div>
+
+                    <!-- بطاقة اختصارات لوحة المفاتيح السريعة -->
+                    <div class="bg-slate-900/40 backdrop-blur-md rounded-2xl p-5 border border-white/10">
+                        <h4 class="text-sm font-bold text-amber-300 mb-3 flex items-center gap-2">
+                            <i data-lucide="keyboard" class="w-4 h-4"></i>
+                            اختصارات تهمك أثناء التطبيق:
+                        </h4>
+                        <ul class="space-y-2.5 text-xs sm:text-sm">
+                            <li class="flex items-center justify-between">
+                                <span class="text-blue-100">تراجع عن خطوة</span>
+                                <kbd class="px-2 py-1 rounded-lg bg-white/15 font-mono text-xs">Ctrl + Z</kbd>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span class="text-blue-100">حفظ المشروع بسرعة</span>
+                                <kbd class="px-2 py-1 rounded-lg bg-white/15 font-mono text-xs">Ctrl + S</kbd>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span class="text-blue-100">فحص كود الصفحة</span>
+                                <kbd class="px-2 py-1 rounded-lg bg-white/15 font-mono text-xs">F12</kbd>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <span class="text-blue-100">التقاط صورة للشاشة</span>
+                                <kbd class="px-2 py-1 rounded-lg bg-white/15 font-mono text-xs">Win + Shift + S</kbd>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- التذييل (Footer) -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800 text-center md:text-right">
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">
+                            مدرسة إسكان الحسا الثانوية المختلطة — مديرية التربية والتعليم لمنطقة الطفيلة
+                        </h4>
+                        <p class="text-xs sm:text-sm font-bold text-blue-600 dark:text-blue-400 mt-0.5">
+                            إعداد وتصميم المعلمة: أنعام الهدايات
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="openPlaygroundModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-bold transition-colors">
+                        مختبر الأكواد التفاعلي
+                    </button>
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/60 dark:hover:bg-blue-900/60 text-blue-700 dark:text-blue-300 text-xs sm:text-sm font-bold transition-colors">
+                        العودة للأعلى ↑
+                    </button>
+                </div>
+            </div>
+            <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
+                <span>مكتبة المهارات الرقمية التفاعلية — مرجع تعليمي متكامل للطلبة.</span>
+                <span>جميع الحقوق التعليمية محفوظة © مدرسة إسكان الحسا الثانوية المختلطة</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- نافذة تفاصيل الأداة وخطوات الاستخدام (Modal) -->
+    <div id="toolDetailModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden transform transition-all">
+            <div id="modalHeaderBanner" class="p-6 bg-gradient-to-l from-blue-600 to-indigo-600 text-white flex items-start justify-between">
+                <div class="flex items-center gap-3.5">
+                    <div id="modalIconBox" class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center">
+                        <!-- الأيقونة -->
+                    </div>
+                    <div>
+                        <span id="modalCategoryTag" class="text-xs font-bold bg-white/20 px-2.5 py-0.5 rounded-full">الفئة</span>
+                        <h3 id="modalTitle" class="text-xl font-extrabold mt-1">اسم الأداة</h3>
+                    </div>
+                </div>
+                <button onclick="closeModal('toolDetailModal')" class="p-1.5 rounded-xl bg-white/10 hover:bg-white/25 text-white transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-5">
+                <div>
+                    <h4 class="text-xs font-bold text-slate-400 uppercase mb-1.5">نبذة عن الأداة:</h4>
+                    <p id="modalDescription" class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+                </div>
+
+                <div class="bg-slate-50 dark:bg-slate-800/70 rounded-2xl p-4 border border-slate-100 dark:border-slate-800">
+                    <h4 class="text-xs font-bold text-blue-600 dark:text-blue-400 mb-2 flex items-center gap-1.5">
+                        <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                        كيف تفيدك في مادة المهارات الرقمية؟
+                    </h4>
+                    <ul id="modalUseCases" class="space-y-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 list-disc list-inside">
+                        <!-- قائمة الاستخدامات -->
+                    </ul>
+                </div>
+
+                <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-1">
+                    <span id="modalGradeText" class="font-bold">المراحل المناسبة: الجميع</span>
+                    <span id="modalPlatformText" class="px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 font-bold">يعمل عبر المتصفح</span>
+                </div>
+
+                <div class="flex items-center gap-3 pt-2">
+                    <a id="modalLaunchBtn" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-500/25 transition-all">
+                        <span>فتح الأداة والبدء</span>
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                    <button onclick="copyToolLink()" class="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors" title="نسخ رابط الأداة">
+                        <i data-lucide="copy" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة مختبر HTML التفاعلي المدمج (Live Playground Modal) -->
+    <div id="playgroundModal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/75 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-5xl w-full h-[85vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+            <!-- رأس المختبر -->
+            <div class="px-5 py-3.5 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                        <i data-lucide="code-2" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm sm:text-base font-bold">مختبر HTML/CSS التفاعلي المباشر</h3>
+                        <p class="text-[11px] text-slate-400 hidden sm:block">اكتب كود HTML وشاهد النتيجة فوراً دون الحاجة لتثبيت أي برنامج</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="resetPlaygroundCode()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 transition-colors">
+                        إعادة الكود الافتراضي
+                    </button>
+                    <button onclick="closeModal('playgroundModal')" class="p-1.5 rounded-lg bg-slate-800 hover:bg-rose-600 text-white transition-colors">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- جسم المختبر (محرر + معاينة) -->
+            <div class="flex-1 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x md:divide-x-reverse divide-slate-200 dark:divide-slate-800 overflow-hidden">
+                <!-- منطقة كتابة الكود -->
+                <div class="flex flex-col h-full bg-slate-950">
+                    <div class="px-4 py-2 bg-slate-900/80 text-xs font-bold text-slate-400 flex items-center justify-between">
+                        <span>محرر الكود (index.html)</span>
+                        <span class="text-emerald-400">● تحديث تلقائي</span>
+                    </div>
+                    <textarea id="htmlCodeEditor" oninput="updateLivePreview()" dir="ltr" spellcheck="false"
+                        class="flex-1 w-full p-4 bg-slate-950 text-emerald-300 font-mono text-xs sm:text-sm focus:outline-none resize-none leading-relaxed"></textarea>
+                </div>
+
+                <!-- منطقة المعاينة الحية -->
+                <div class="flex flex-col h-full bg-white">
+                    <div class="px-4 py-2 bg-slate-100 text-xs font-bold text-slate-600 flex items-center justify-between border-b border-slate-200">
+                        <span>معاينة المتصفح الحية</span>
+                        <span class="text-blue-600">Preview</span>
+                    </div>
+                    <iframe id="livePreviewFrame" title="معاينة الكود" class="flex-1 w-full h-full border-0 bg-white"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- إشعار منبثق (Toast Notification) بديل عن alert() -->
+    <div id="toastNotification" class="fixed bottom-5 left-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-sm font-bold">
+            <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400 dark:text-emerald-600"></i>
+            <span id="toastMessage">تمت العملية بنجاح</span>
+        </div>
+    </div>
+
+    <!-- المنطق البرمجي التفاعلي (JavaScript) -->
+    <script>
+        // قاعدة بيانات شاملة لتطبيقات وأدوات مادة المهارات الرقمية
+        const digitalTools = [
+            {
+                id: 'scratch-platform',
+                name: 'منصة سكراتش للبرمجة (Scratch)',
+                category: 'programming',
+                categoryLabel: 'البرمجة (سكراتش وبايثون)',
+                grades: ['elementary', 'middle'],
+                gradeLabel: 'الأساسية والمتوسطة',
+                description: 'بيئة برمجة مرئية مجانية من معهد MIT تتيح للطلبة تصميم الألعاب والقصص التفاعلية والرسوم المتحركة عبر تركيب اللبنات البرمجية بسهولة.',
+                useCases: [
+                    'تعلم مفاهيم التكرار والشروط والمتغيرات بطريقة بصرية ممتعة.',
+                    'إنشاء ألعاب تعليمية وقصص تفاعلية باللغة العربية.',
+                    'تنمية التفكير المنطقي وحل المشكلات بدون أخطاء كتابية.'
+                ],
+                platform: 'متصفح الويب وتطبيقات لوحية (مجاني)',
+                icon: 'puzzle',
+                color: 'amber',
+                url: 'https://scratch.mit.edu/'
+            },
+            {
+                id: 'python-programiz',
+                name: 'مترجم بايثون السحابي (Programiz Python)',
+                category: 'programming',
+                categoryLabel: 'البرمجة (سكراتش وبايثون)',
+                grades: ['middle', 'high'],
+                gradeLabel: 'المتوسطة والثانوية',
+                description: 'بيئة كتابة وتشغيل أكواد لغة بايثون (Python) مباشرة عبر المتصفح دون الحاجة لتثبيت أي برامج على الحاسوب أو الهاتف.',
+                useCases: [
+                    'تطبيق دروس المتغيرات، الجمل الشرطية if/else، والحلقات التكرارية.',
+                    'كتابة برامج حسابية تفاعلية واختبارها فوراً من أي جهاز.',
+                    'مشاركة الأكواد البرمجية وحفظها بسهولة.'
+                ],
+                platform: 'متصفح الويب (مجاني)',
+                icon: 'terminal-square',
+                color: 'emerald',
+                url: 'https://www.programiz.com/python-programming/online-compiler/'
+            },
+            {
+                id: 'html-css-w3schools',
+                name: 'مرجع ومحرر الويب (W3Schools HTML/CSS)',
+                category: 'web',
+                categoryLabel: 'تصميم المواقع HTML/CSS',
+                grades: ['middle', 'high'],
+                gradeLabel: 'المتوسطة والثانوية',
+                description: 'أشهر منصة تعليمية لتعلم تصميم صفحات الويب بلغة HTML وتنسيقها بلغة CSS مع إمكانية التجربة المباشرة لكل وسم.',
+                useCases: [
+                    'تعلم وسوم HTML الأساسية (العناوين، الفقرات، الصور، الجداول، الروابط).',
+                    'تنسيق الألوان والخطوط وتخطيط الصفحات باستخدام CSS.',
+                    'تجربة الأمثلة التفاعلية والتعديل عليها مباشرة.'
+                ],
+                platform: 'متصفح الويب (مجاني)',
+                icon: 'globe',
+                color: 'blue',
+                url: 'https://www.w3schools.com/html/'
+            },
+            {
+                id: 'cisco-packet-tracer',
+                name: 'محاكي الشبكات Cisco Packet Tracer',
+                category: 'networks',
+                categoryLabel: 'الشبكات وباكت تريسر',
+                grades: ['middle', 'high'],
+                gradeLabel: 'المتوسطة والثانوية',
+                description: 'برنامج محاكاة تفاعلي رائد من شركة سيسكو يتيح بناء الشبكات الحاسوبية، ربط الأجهزة والموجهات، وضبط عناوين IP وتتبع حركة حزم البيانات عملياً.',
+                useCases: [
+                    'تصميم شبكات محلية (LAN) وواسعة (WAN) وربط الحواسيب بالموجهات والمبدلات.',
+                    'إعداد عناوين IPv4 و IPv6 واختبار الاتصال باستخدام أمر Ping.',
+                    'استخدام وضع المحاكاة (Simulation Mode) لمشاهدة انتقال حزم البيانات خطوة بخطوة.'
+                ],
+                platform: 'حاسوب وتطبيقات ذكية (مجاني)',
+                icon: 'network',
+                color: 'purple',
+                url: 'https://www.netacad.com/cisco-packet-tracer'
+            },
+            {
+                id: 'gemini-ai',
+                name: 'المساعد الذكي جيميناي (Google Gemini)',
+                category: 'projects',
+                categoryLabel: 'الذكاء الاصطناعي والمشاريع',
+                grades: ['elementary', 'middle', 'high'],
+                gradeLabel: 'جميع المراحل',
+                description: 'مساعد ذكاء اصطناعي توليدي متطور يعمل كمعلم خصوصي ذكي يساعد الطلبة في فهم الدروس الصعبة، تلخيص المفاهيم، وتوليد أفكار لمشاريع المهارات الرقمية.',
+                useCases: [
+                    'شرح المفاهيم البرمجية وتبسيط الأكواد خطوة بخطوة.',
+                    'العصف الذهني وتوليد أفكار إبداعية للمشاريع والعروض التقديمية.',
+                    'طرح أسئلة مراجعة تفاعلية لاختبار فهم الطالب قبل الاختبارات.'
+                ],
+                platform: 'متصفح الويب وتطبيقات ذكية',
+                icon: 'sparkles',
+                color: 'blue',
+                url: 'https://gemini.google.com/'
+            },
+            {
+                id: 'chatgpt-ai',
+                name: 'المساعد التوليدي (ChatGPT)',
+                category: 'projects',
+                categoryLabel: 'الذكاء الاصطناعي والمشاريع',
+                grades: ['middle', 'high'],
+                gradeLabel: 'المتوسطة والثانوية',
+                description: 'نموذج محادثة ذكي يساعد الطلبة في صياغة الأفكار، تعلم لغات البرمجة مثل بايثون و HTML، واكتشاف الأخطاء البرمجية وتصحيحها.',
+                useCases: [
+                    'المساعدة في اكتشاف أخطاء الأكواد البرمجية (Debugging) وفهم سببها.',
+                    'تلخيص النصوص الطويلة وتحويلها إلى نقاط رئيسية منظمة.',
+                    'التدرب على كتابة أوامر ذكية (Prompts) للحصول على أفضل النتائج.'
+                ],
+                platform: 'متصفح الويب (مجاني)',
+                icon: 'message-square-code',
+                color: 'emerald',
+                url: 'https://chat.openai.com/'
+            },
+            {
+                id: 'notebooklm',
+                name: 'المفكرة الذكية (Google NotebookLM)',
+                category: 'projects',
+                categoryLabel: 'الذكاء الاصطناعي والمشاريع',
+                grades: ['middle', 'high'],
+                gradeLabel: 'المتوسطة والثانوية',
+                description: 'أداة بحث وتلخيص مدعومة بالذكاء الاصطناعي تتيح للطلبة رفع ملفات الدروس والملاحظات وتحويلها إلى ملخصات، خرائط مفاهيم، وأسئلة مراجعة.',
+                useCases: [
+                    'رفع ملخصات مادة المهارات الرقمية وطرح أسئلة مباشرة من محتواها.',
+                    'إنشاء أدلة دراسية (Study Guides) ومصطلحات رئيسية تلقائياً.',
+                    'تنظيم مصادر الأبحاث المدرسية والربط بين المعلومات بدقة.'
+                ],
+                platform: 'متصفح الويب (مجاني)',
+                icon: 'book-open-check',
+                color: 'indigo',
+                url: 'https://notebooklm.google.com/'
+            },
+            {
+                id: 'canva-magic',
+                name: 'استوديو التصميم الذكي (Canva Magic)',
+                category: 'projects',
+                categoryLabel: 'الذكاء الاصطناعي والمشاريع',
+                grades: ['elementary', 'middle', 'high'],
+                gradeLabel: 'جميع المراحل',
+                description: 'أدوات توليد الصور والتصميم بالذكاء الاصطناعي لتحويل الوصف النصي إلى رسومات، ملصقات توعوية، وعروض تقديمية احترافية.',
+                useCases: [
+                    'توليد صور توضيحية مخصصة للمشاريع والقصص الرقمية من النص.',
+                    'إنشاء شرائح عروض تقديمية متكاملة بضغطة زر وتنسيقها.',
+                    'تصميم المطويات الرقمية والإنفوجرافيك التعليمي بسهولة.'
+                ],
+                platform: 'متصفح الويب (مجاني)',
+                icon: 'wand-2',
+                color: 'purple',
+                url: 'https://www.canva.com/magic/'
+            },
+            {
+                id: 'teachable-machine',
+                name: 'آلة التعلم الذكية (Teachable Machine)',
+                category: 'projects',
+                categoryLabel: 'الذكاء الاصطناعي والمشاريع',
+                grades: ['elementary', 'middle', 'high'],
+                gradeLabel: 'جميع المراحل',
+                description: 'أداة مذهلة من جوجل تتيح للطلبة تدريب نماذج التعلم الآلي (Machine Learning) للتعرف على الصور والأصوات والحركات دون كتابة كود.',
+                useCases: [
+                    'فهم كيفية تدريب الذكاء الاصطناعي عملياً باستخدام الكاميرا أو الميكروفون.',
+                    'إنشاء مشاريع ذكية تصنف الأشياء أو تتعرف على الإيماءات.',
+                    'ربط النموذج المدرب بمشاريع سكراتش أو صفحات الويب التفاعلية.'
+                ],
+                platform: 'متصفح الويب (مجاني)',
+                icon: 'brain-circuit',
+                color: 'cyan',
+                url: 'https://teachablemachine.withgoogle.com/'
+            },
+            {
+                id: 'interland-safety',
+                name: 'أبطال الإنترنت (Google Interland)',
+                category: 'safety',
+                categoryLabel: 'السلامة الرقمية',
+                grades: ['elementary', 'middle'],
+                gradeLabel: 'الأساسية والمتوسطة',
+                description: 'لعبة تفاعلية ممتعة باللغة العربية تعلم الطلبة قواعد الأمان الرقمي، حماية الخصوصية، والتصدي للتنمر الإلكتروني والاحتيال.',
+                useCases: [
+                    'تعلم إنشاء كلمات مرور قوية وحماية المعلومات الشخصية.',
+                    'التمييز بين الروابط الآمنة ورسائل التصيد الاحتيالي.',
+                    'تعزيز المواطنة الرقمية الإيجابية بأسلوب اللعب.'
+                ],
+                platform: 'متصفح الويب (مجاني)',
+                icon: 'shield-check',
+                color: 'rose',
+                url: 'https://beinternetawesome.withgoogle.com/ar_all/interland'
+            },
+            {
+                id: 'tinkercad-3d',
+                name: 'تنكركاد للتصميم والدوائر (Tinkercad)',
+                category: 'basics',
+                categoryLabel: 'المهارات الرقمية الأساسية',
+                grades: ['elementary', 'middle', 'high'],
+                gradeLabel: 'جميع المراحل',
+                description: 'منصة مجانية من Autodesk لتصميم المجسمات ثلاثية الأبعاد ومحاكاة الدوائر الإلكترونية ولوحات الأردوينو (Arduino) برمجياً.',
+                useCases: [
+                    'تصميم نماذج ثلاثية الأبعاد وتطوير مهارات التخيل الهندسي.',
+                    'محاكاة الدوائر الإلكترونية والمستشعرات بأمان تام.',
+                    'برمجة المتحكمات الدقيقة باستخدام اللبنات أو الكود النصي.'
+                ],
+                platform: 'متصفح الويب (مجاني)',
+                icon: 'box',
+                color: 'orange',
+                url: 'https://www.tinkercad.com/'
+            },
+            {
+                id: 'photopea',
+                name: 'فوتوبيا لتحرير الصور (Photopea)',
+                category: 'basics',
+                categoryLabel: 'المهارات الرقمية الأساسية',
+                grades: ['middle', 'high'],
+                gradeLabel: 'المتوسطة والثانوية',
+                description: 'محرر صور احترافي متكامل يعمل عبر المتصفح مجاناً، يدعم الطبقات والتأثيرات وملفات PSD دون الحاجة لتثبيت برامج.',
+                useCases: [
+                    'تعديل الصور ودمجها وإزالة الخلفيات باحترافية.',
+                    'تطبيق دروس التصميم الجرافيكي والوسائط المتعددة.',
+                    'العمل السريع على أي جهاز مدرسي أو منزلي.'
+                ],
+                platform: 'متصفح الويب (مجاني)',
+                icon: 'image',
+                color: 'blue',
+                url: 'https://www.photopea.com/'
+            },
+            {
+                id: 'diagrams-net',
+                name: 'رسم المخططات والخوارزميات (Draw.io)',
+                category: 'programming',
+                categoryLabel: 'البرمجة (سكراتش وبايثون)',
+                grades: ['middle', 'high'],
+                gradeLabel: 'المتوسطة والثانوية',
+                description: 'أداة مجانية وسهلة لرسم المخططات الانسيابية (Flowcharts) والخرائط الذهنية ومخططات الشبكات.',
+                useCases: [
+                    'رسم المخططات الانسيابية للخوارزميات قبل البرمجة.',
+                    'تصميم مخططات طوبولوجيا الشبكات للمشاريع.',
+                    'تصدير المخططات كصور عالية الجودة لإدراجها في التقارير.'
+                ],
+                platform: 'متصفح الويب (مجاني)',
+                icon: 'git-fork',
+                color: 'amber',
+                url: 'https://app.diagrams.net/'
+            }
+        ];
+
+        // أمثلة أكواد بايثون التفاعلية
+        const pythonExamples = {
+            grade: `# برنامج حساب التقدير الدراسي للطالب
+score = 92
+print("العلامة المدخلة:", score)
+
+if score >= 90:
+    print("التقدير: ممتاز 🌟")
+elif score >= 80:
+    print("التقدير: جيد جداً 👏")
+elif score >= 70:
+    print("التقدير: جيد 👍")
+else:
+    print("يحتاج إلى مراجعة إضافية 📚")`,
+            loop: `# برنامج طباعة جدول الضرب باستخدام حلقة for
+number = 7
+print("جدول الضرب للعدد:", number)
+
+for i in range(1, 11):
+    result = number * i
+    print(number, "x", i, "=", result)`,
+            calc: `# برنامج حساب مساحة ومحيط المستطيل
+length = 12
+width = 5
+
+area = length * width
+perimeter = 2 * (length + width)
+
+print("الطول =", length, "| العرض =", width)
+print("مساحة المستطيل =", area)
+print("محيط المستطيل =", perimeter)`
+        };
+
+        // قاعدة بيانات النصائح السريعة للطلاب
+        const studentTips = [
+            {
+                badge: 'نصيحة برمجية',
+                title: 'قسّم المشكلة الكبيرة إلى خطوات صغيرة (الخوارزمية)',
+                description: 'قبل أن تبدأ بكتابة الكود في بايثون أو سحب اللبنات في سكراتش، اكتب خطوات الحل على ورقة بالترتيب. التفكير الخوارزمي يوفر 70% من وقت تصحيح الأخطاء!'
+            },
+            {
+                badge: 'السلامة الرقمية',
+                title: 'اجعل كلمة مرورك كجملة سرية طويلة ومميزة',
+                description: 'بدلاً من استخدام تاريخ ميلادك أو اسمك، ابتكر جملة تذكرك بشيء تحبه وادمج معها أرقاماً ورموزاً مثل: (MySchool@2026#Star) لحماية حساباتك من الاختراق.'
+            },
+            {
+                badge: 'تصميم المواقع',
+                title: 'تذكر دائماً إغلاق الوسوم في لغة HTML',
+                description: 'معظم الأخطاء في صفحات الويب تحدث بسبب نسيان وسم الإغلاق مثل </h1> أو </p>. احرص على ترتيب الكود بمسافات بادئة (Indentation) ليسهل عليك قراءته.'
+            },
+            {
+                badge: 'تنظيم الملفات',
+                title: 'سمِّ ملفات مشاريعك بأسماء واضحة ومنظمة',
+                description: 'تجنب تسمية ملفاتك بـ (مشروع1 أو جديد). استخدم أسماء واضحة مثل: (مشروع_العلوم_أحمد_الصف_الثاني) واحفظها في مجلد مخصص لكل مادة دراسية.'
+            },
+            {
+                badge: 'المواطنة الرقمية',
+                title: 'تحقق من مصداقية المعلومات قبل مشاركتها',
+                description: 'ليست كل معلومة على الإنترنت صحيحة. تأكد دائماً من تاريخ نشر المعلومة ومصدرها الرسمي قبل استخدامها في أبحاثك أو مشاركتها مع الآخرين.'
+            }
+        ];
+
+        // الكود الافتراضي لمختبر HTML التفاعلي
+        const defaultPlaygroundCode = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      text-align: center;
+      padding: 40px 20px;
+      color: #1e3a8a;
+    }
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      max-width: 400px;
+      margin: auto;
+    }
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover { background: #1d4ed8; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>مرحباً بك في عالم البرمجة! 🚀</h1>
+    <p>جرّب تعديل هذا النص أو تغيير الألوان في المحرر المجاور.</p>
+    <button onclick="document.getElementById('msg').innerText = 'أحسنت! لقد نفذت أول أمر تفاعلي بنجاح 🎉'">
+      اضغط للتجربة
+    </button>
+    <p id="msg" style="font-weight: bold; color: #059669; margin-top: 15px;"></p>
+  </div>
+</body>
+</html>`;
+
+        // متغيرات الحالة (State)
+        let currentGrade = 'all';
+        let currentCategory = 'all';
+        let showFavoritesOnly = false;
+        let favorites = JSON.parse(localStorage.getItem('digitalSkillsFavorites')) || [];
+        let currentTipIndex = 0;
+        let activeModalTool = null;
+
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', () => {
+            // التحقق من الوضع الليلي المحفوظ
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+            updateFavBadge();
+            renderTools();
+            initPlayground();
+            loadPythonExample('grade');
+            lucide.createIcons();
+        });
+
+        // التبديل بين تبويبي بايثون وسكراتش
+        function switchCodingTab(tab) {
+            const pyBtn = document.getElementById('tabPythonBtn');
+            const scBtn = document.getElementById('tabScratchBtn');
+            const pyContent = document.getElementById('pythonTabContent');
+            const scContent = document.getElementById('scratchTabContent');
+
+            if (tab === 'python') {
+                pyBtn.className = 'flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-white text-emerald-800 shadow-md transition-all';
+                scBtn.className = 'flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white hover:bg-white/15 transition-all';
+                pyContent.classList.remove('hidden');
+                scContent.classList.add('hidden');
+            } else {
+                scBtn.className = 'flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-white text-orange-700 shadow-md transition-all';
+                pyBtn.className = 'flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold text-white hover:bg-white/15 transition-all';
+                scContent.classList.remove('hidden');
+                pyContent.classList.add('hidden');
+            }
+            lucide.createIcons();
+        }
+
+        // تحميل مثال بايثون في المحرر
+        function loadPythonExample(key) {
+            const area = document.getElementById('pythonCodeArea');
+            if (area && pythonExamples[key]) {
+                area.value = pythonExamples[key];
+                runPythonSimulator();
+            }
+        }
+
+        // محاكي تنفيذ مبسط لأكواد بايثون التعليمية داخل المتصفح
+        function runPythonSimulator() {
+            const code = document.getElementById('pythonCodeArea').value;
+            const outputEl = document.getElementById('pythonConsoleOutput');
+            const lines = code.split('\n');
+            const vars = {};
+            const outputs = [];
+
+            const evalExpr = (expr) => {
+                let replaced = expr.trim();
+                // استبدال المتغيرات بقيمها
+                Object.keys(vars).sort((a, b) => b.length - a.length).forEach(v => {
+                    const regex = new RegExp(`\\b${v}\\b`, 'g');
+                    replaced = replaced.replace(regex, JSON.stringify(vars[v]));
+                });
+                try {
+                    return Function(`"use strict"; return (${replaced});`)();
+                } catch {
+                    return expr.replace(/^["']|["']$/g, '');
+                }
+            };
+
+            try {
+                let skipBlock = false;
+                let conditionMatched = false;
+
+                for (let idx = 0; idx < lines.length; idx++) {
+                    const rawLine = lines[idx];
+                    const trimmed = rawLine.trim();
+                    if (!trimmed || trimmed.startsWith('#')) continue;
+
+                    const isIndented = rawLine.startsWith('    ') || rawLine.startsWith('\t');
+                    if (!isIndented && !trimmed.startsWith('elif ') && !trimmed.startsWith('else:')) {
+                        skipBlock = false;
+                        conditionMatched = false;
+                    }
+
+                    if (isIndented && skipBlock) continue;
+
+                    // معالجة الحلقات البسيطة for i in range(a, b):
+                    const forMatch = trimmed.match(/^for\s+([a-zA-Z_]\w*)\s+in\s+range\(\s*(\d+)\s*,\s*(\d+)\s*\):$/);
+                    if (forMatch) {
+                        const loopVar = forMatch[1];
+                        const start = parseInt(forMatch[2], 10);
+                        const end = parseInt(forMatch[3], 10);
+                        const bodyLines = [];
+                        while (idx + 1 < lines.length && (lines[idx + 1].startsWith('    ') || lines[idx + 1].startsWith('\t'))) {
+                            idx++;
+                            bodyLines.push(lines[idx].trim());
+                        }
+                        for (let val = start; val < end; val++) {
+                            vars[loopVar] = val;
+                            bodyLines.forEach(bLine => {
+                                const assignM = bLine.match(/^([a-zA-Z_]\w*)\s*=\s*(.+)$/);
+                                if (assignM && !bLine.startsWith('print(')) {
+                                    vars[assignM[1]] = evalExpr(assignM[2]);
+                                } else if (bLine.startsWith('print(') && bLine.endsWith(')')) {
+                                    const inner = bLine.slice(6, -1);
+                                    const parts = inner.split(',').map(p => evalExpr(p));
+                                    outputs.push(parts.join(' '));
+                                }
+                            });
+                        }
+                        continue;
+                    }
+
+                    // معالجة الجمل الشرطية if / elif / else
+                    if (trimmed.startsWith('if ') && trimmed.endsWith(':')) {
+                        const cond = trimmed.slice(3, -1);
+                        const res = Boolean(evalExpr(cond));
+                        skipBlock = !res;
+                        conditionMatched = res;
+                        continue;
+                    }
+                    if (trimmed.startsWith('elif ') && trimmed.endsWith(':')) {
+                        if (conditionMatched) {
+                            skipBlock = true;
+                        } else {
+                            const cond = trimmed.slice(5, -1);
+                            const res = Boolean(evalExpr(cond));
+                            skipBlock = !res;
+                            conditionMatched = res;
+                        }
+                        continue;
+                    }
+                    if (trimmed === 'else:') {
+                        skipBlock = conditionMatched;
+                        continue;
+                    }
+
+                    // معالجة أمر الطباعة print(...)
+                    if (trimmed.startsWith('print(') && trimmed.endsWith(')')) {
+                        const inner = trimmed.slice(6, -1);
+                        const parts = inner.split(',').map(p => evalExpr(p));
+                        outputs.push(parts.join(' '));
+                        continue;
+                    }
+
+                    // معالجة إسناد المتغيرات x = ...
+                    const assignMatch = trimmed.match(/^([a-zA-Z_]\w*)\s*=\s*(.+)$/);
+                    if (assignMatch) {
+                        vars[assignMatch[1]] = evalExpr(assignMatch[2]);
+                    }
+                }
+
+                outputEl.textContent = outputs.length > 0 ? outputs.join('\n') : 'تم التنفيذ بنجاح (لا توجد مخرجات print).';
+            } catch (err) {
+                outputEl.textContent = 'خطأ في صياغة الكود: تأكد من كتابة الأوامر بشكل صحيح.';
+            }
+        }
+
+        // نسخ كود بايثون
+        function copyPythonCode() {
+            const area = document.getElementById('pythonCodeArea');
+            area.select();
+            document.execCommand('copy');
+            showToast('تم نسخ كود بايثون إلى الحافظة!');
+        }
+
+        // نسخ أوامر الذكاء الاصطناعي (Prompts)
+        function copyPromptText(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast('تم نسخ الأمر الذكي! يمكنك لصقه الآن في Gemini أو ChatGPT');
+        }
+
+        // خريطة ألوان البطاقات
+        const colorStyles = {
+            amber: 'bg-amber-100 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400',
+            emerald: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400',
+            teal: 'bg-teal-100 text-teal-600 dark:bg-teal-950/60 dark:text-teal-400',
+            blue: 'bg-blue-100 text-blue-600 dark:bg-blue-950/60 dark:text-blue-400',
+            indigo: 'bg-indigo-100 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400',
+            orange: 'bg-orange-100 text-orange-600 dark:bg-orange-950/60 dark:text-orange-400',
+            sky: 'bg-sky-100 text-sky-600 dark:bg-sky-950/60 dark:text-sky-400',
+            purple: 'bg-purple-100 text-purple-600 dark:bg-purple-950/60 dark:text-purple-400',
+            cyan: 'bg-cyan-100 text-cyan-600 dark:bg-cyan-950/60 dark:text-cyan-400',
+            rose: 'bg-rose-100 text-rose-600 dark:bg-rose-950/60 dark:text-rose-400',
+            violet: 'bg-violet-100 text-violet-600 dark:bg-violet-950/60 dark:text-violet-400'
+        };
+
+        // عرض البطاقات بناءً على الفلاتر
+        function renderTools() {
+            const grid = document.getElementById('toolsGrid');
+            const emptyState = document.getElementById('emptyState');
+            const searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+            const clearBtn = document.getElementById('clearSearchBtn');
+
+            // إظهار أو إخفاء زر مسح البحث
+            if (searchQuery.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            // تصفية البيانات
+            const filtered = digitalTools.filter(tool => {
+                const matchesGrade = currentGrade === 'all' || tool.grades.includes(currentGrade);
+                const matchesCat = currentCategory === 'all' || tool.category === currentCategory;
+                const matchesFav = !showFavoritesOnly || favorites.includes(tool.id);
+                const matchesSearch = searchQuery === '' ||
+                    tool.name.toLowerCase().includes(searchQuery) ||
+                    tool.description.toLowerCase().includes(searchQuery) ||
+                    tool.categoryLabel.toLowerCase().includes(searchQuery) ||
+                    tool.gradeLabel.toLowerCase().includes(searchQuery);
+
+                return matchesGrade && matchesCat && matchesFav && matchesSearch;
+            });
+
+            // تحديث العداد
+            document.getElementById('resultsCounter').textContent = `عرض ${filtered.length} من ${digitalTools.length} أداة`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                lucide.createIcons();
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+
+            grid.innerHTML = filtered.map(tool => {
+                const isFav = favorites.includes(tool.id);
+                const iconStyle = colorStyles[tool.color] || colorStyles.blue;
+
+                return `
+                <article class="group bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-600 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <!-- رأس البطاقة: الأيقونة وزر المفضلة -->
+                        <div class="flex items-start justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-2xl ${iconStyle} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="${tool.icon}" class="w-6 h-6"></i>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                                    ${tool.categoryLabel}
+                                </span>
+                                <button onclick="toggleFavorite('${tool.id}')" aria-label="إضافة للمفضلة"
+                                    class="p-2 rounded-xl transition-colors ${isFav ? 'bg-rose-50 text-rose-500 dark:bg-rose-950/60 dark:text-rose-400' : 'bg-slate-50 text-slate-400 hover:text-rose-500 dark:bg-slate-800 dark:hover:text-rose-400'}">
+                                    <i data-lucide="heart" class="w-4 h-4 ${isFav ? 'fill-current' : ''}"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- عنوان الأداة والمرحلة -->
+                        <h3 class="text-lg font-extrabold text-slate-900 dark:text-white mb-1.5 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            ${tool.name}
+                        </h3>
+                        <div class="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 mb-3">
+                            <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-blue-500"></i>
+                            <span>${tool.gradeLabel}</span>
+                        </div>
+
+                        <!-- وصف الأداة -->
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-5 line-clamp-3">
+                            ${tool.description}
+                        </p>
+                    </div>
+
+                    <!-- أزرار التفاعل السفلية -->
+                    <div class="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-2.5">
+                        <a href="${tool.url}" target="_blank" rel="noopener noreferrer"
+                            class="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-bold shadow-sm shadow-blue-500/20 transition-all">
+                            <span>فتح الأداة</span>
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <button onclick="openToolDetails('${tool.id}')"
+                            class="py-2.5 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-bold transition-colors flex items-center gap-1">
+                            <i data-lucide="info" class="w-4 h-4"></i>
+                            <span>التفاصيل</span>
+                        </button>
+                    </div>
+                </article>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        // تصفية حسب المرحلة الدراسية
+        function setGradeFilter(grade) {
+            currentGrade = grade;
+            document.querySelectorAll('.grade-btn').forEach(btn => {
+                if (btn.dataset.grade === grade) {
+                    btn.className = 'grade-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-blue-600 text-white shadow-md shadow-blue-500/25';
+                } else {
+                    btn.className = 'grade-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-blue-400';
+                }
+            });
+            renderTools();
+        }
+
+        // تصفية حسب المجال التقني
+        function setCategoryFilter(category) {
+            currentCategory = category;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === category) {
+                    btn.className = 'cat-btn active shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm transition-all';
+                } else {
+                    btn.className = 'cat-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all';
+                }
+            });
+            renderTools();
+        }
+
+        // البحث الفوري
+        function filterTools() {
+            renderTools();
+        }
+
+        // مسح حقل البحث
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            renderTools();
+        }
+
+        // إعادة ضبط جميع الفلاتر
+        function resetAllFilters() {
+            document.getElementById('searchInput').value = '';
+            showFavoritesOnly = false;
+            updateFavoritesBtnUI();
+            setGradeFilter('all');
+            setCategoryFilter('all');
+        }
+
+        // إدارة المفضلة
+        function toggleFavorite(id) {
+            const index = favorites.indexOf(id);
+            if (index === -1) {
+                favorites.push(id);
+                showToast('تمت إضافة الأداة إلى مفضلتك ❤️');
+            } else {
+                favorites.splice(index, 1);
+                showToast('تمت إزالة الأداة من المفضلة');
+            }
+            localStorage.setItem('digitalSkillsFavorites', JSON.stringify(favorites));
+            updateFavBadge();
+            renderTools();
+        }
+
+        function updateFavBadge() {
+            document.getElementById('favCountBadge').textContent = favorites.length;
+        }
+
+        function toggleFavoritesFilter() {
+            showFavoritesOnly = !showFavoritesOnly;
+            updateFavoritesBtnUI();
+            renderTools();
+        }
+
+        function updateFavoritesBtnUI() {
+            const btn = document.getElementById('favoritesToggleBtn');
+            if (showFavoritesOnly) {
+                btn.classList.add('bg-rose-600', 'text-white', 'hover:bg-rose-700', 'hover:text-white');
+                btn.classList.remove('bg-slate-100', 'text-slate-700', 'dark:bg-slate-800', 'dark:text-slate-300');
+            } else {
+                btn.classList.remove('bg-rose-600', 'text-white', 'hover:bg-rose-700', 'hover:text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-700', 'dark:bg-slate-800', 'dark:text-slate-300');
+            }
+        }
+
+        // فتح نافذة تفاصيل الأداة
+        function openToolDetails(id) {
+            const tool = digitalTools.find(t => t.id === id);
+            if (!tool) return;
+            activeModalTool = tool;
+
+            document.getElementById('modalTitle').textContent = tool.name;
+            document.getElementById('modalCategoryTag').textContent = tool.categoryLabel;
+            document.getElementById('modalDescription').textContent = tool.description;
+            document.getElementById('modalGradeText').textContent = `المراحل المناسبة: ${tool.gradeLabel}`;
+            document.getElementById('modalPlatformText').textContent = tool.platform;
+            document.getElementById('modalLaunchBtn').href = tool.url;
+
+            document.getElementById('modalIconBox').innerHTML = `<i data-lucide="${tool.icon}" class="w-6 h-6 text-white"></i>`;
+            document.getElementById('modalUseCases').innerHTML = tool.useCases.map(item => `<li>${item}</li>`).join('');
+
+            const modal = document.getElementById('toolDetailModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
+        }
+
+        // إغلاق النوافذ المنبثقة
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // نسخ رابط الأداة باستخدام execCommand لضمان التوافق
+        function copyToolLink() {
+            if (!activeModalTool) return;
+            const tempInput = document.createElement('input');
+            tempInput.value = activeModalTool.url;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast('تم نسخ رابط الأداة إلى الحافظة!');
+        }
+
+        // تبديل النصيحة التالية
+        function nextTip() {
+            currentTipIndex = (currentTipIndex + 1) % studentTips.length;
+            const tip = studentTips[currentTipIndex];
+            document.getElementById('tipBadge').textContent = tip.badge;
+            document.getElementById('tipTitle').textContent = tip.title;
+            document.getElementById('tipDescription').textContent = tip.description;
+            document.getElementById('tipCounter').textContent = `نصيحة ${currentTipIndex + 1} من ${studentTips.length}`;
+        }
+
+        // إدارة مختبر HTML التفاعلي
+        function initPlayground() {
+            const editor = document.getElementById('htmlCodeEditor');
+            editor.value = defaultPlaygroundCode;
+            updateLivePreview();
+        }
+
+        function openPlaygroundModal() {
+            const modal = document.getElementById('playgroundModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            updateLivePreview();
+        }
+
+        function resetPlaygroundCode() {
+            document.getElementById('htmlCodeEditor').value = defaultPlaygroundCode;
+            updateLivePreview();
+            showToast('تمت إعادة الكود الافتراضي');
+        }
+
+        function updateLivePreview() {
+            const code = document.getElementById('htmlCodeEditor').value;
+            const iframe = document.getElementById('livePreviewFrame');
+            const doc = iframe.contentDocument || iframe.contentWindow.document;
+            doc.open();
+            doc.write(code);
+            doc.close();
+        }
+
+        // تبديل الوضع الليلي / النهاري
+        function toggleDarkMode() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // إظهار إشعار Toast
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // إغلاق النوافذ عند النقر خارجها أو الضغط على Esc
+        window.addEventListener('click', (e) => {
+            if (e.target.id === 'toolDetailModal') closeModal('toolDetailModal');
+            if (e.target.id === 'playgroundModal') closeModal('playgroundModal');
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal('toolDetailModal');
+                closeModal('playgroundModal');
+            }
+        });
+    </script>
+</body>
+</html>
